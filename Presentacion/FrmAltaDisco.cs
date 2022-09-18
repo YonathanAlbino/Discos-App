@@ -21,8 +21,14 @@ namespace Presentacion
         {
             InitializeComponent();
         }
-
-       
+        public FrmAltaDisco(Disco disco)
+        {
+            InitializeComponent();
+            Text = "Modificar Disco";
+            this.disco = disco;
+            lblTituloAltaDisco.Text = "Modificar Disco";
+        }
+        private Disco disco = null;
 
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -35,20 +41,27 @@ namespace Presentacion
             DiscosNegocio negocio = new DiscosNegocio();
             try
             {
-                Disco disco = new Disco(txtTitulo.Text, int.Parse(txtCantidadCanciones.Text));
+                //Disco disco = new Disco(txtTitulo.Text, int.Parse(txtCantidadCanciones.Text));
+                if (disco == null)
+                    disco = new Disco();
+                disco.Titulo = txtTitulo.Text;
+                disco.CantidadDeCanciones = int.Parse(txtCantidadCanciones.Text);
                 disco.FechaLanzamiento = dtpFechaLanzamiento.Value;
                 disco.Genero = (Estilo)cboGenero.SelectedItem;
                 disco.Edicion = (TipoDeEdicion)cboTipoDeEdicion.SelectedItem;
                 disco.UrlImagenTapa = txtUrlImagen.Text;
 
-                negocio.agregar(disco);
-                MessageBox.Show("Agregado exitosamente");
-                Close();
-            }
-            catch (FormatException)
-            {
 
-                MessageBox.Show("Ingrese numeros en el campo" + " + cantidad de canciones" + " + ");
+                if (disco.Id != 0) {
+                    negocio.modificar(disco);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
+                    negocio.agregar(disco);
+                    MessageBox.Show("Agregado exitosamente");
+                }
+                Close();
             }
             catch (Exception ex)
             {
@@ -60,13 +73,31 @@ namespace Presentacion
 
         private void FrmAltaDisco_Load(object sender, EventArgs e)
         {
-            
             EstiloNegocio estiloNegocio = new EstiloNegocio();
             TipoEdicionNegocio tipoEdicionNegocio = new TipoEdicionNegocio();
+            refactorizar ajustes = new refactorizar();
             try
             {
                 cboGenero.DataSource = estiloNegocio.listar();
+                cboGenero.ValueMember = "Id";
+                cboGenero.DisplayMember = "Descripcion";
                 cboTipoDeEdicion.DataSource = tipoEdicionNegocio.listar();
+                cboTipoDeEdicion.ValueMember = "Id";
+                cboTipoDeEdicion.DisplayMember = "Descripcion";
+
+                if(disco != null)
+                {
+                    txtTitulo.Text = disco.Titulo;
+                    dtpFechaLanzamiento.Value = disco.FechaLanzamiento;
+                    txtCantidadCanciones.Text = disco.CantidadDeCanciones.ToString();
+                    txtUrlImagen.Text = disco.UrlImagenTapa;
+                    ajustes.cargarImagen(pcbImagenDiscoAlta, disco.UrlImagenTapa);
+                    cboGenero.SelectedValue = disco.Genero.Id;
+                    cboTipoDeEdicion.SelectedValue = disco.Edicion.Id;
+                  
+                    
+                }
+                  
             }
             catch (Exception ex)
             {
@@ -104,6 +135,7 @@ namespace Presentacion
             {
                 nuevo.Descripcion = txtNuevoGenero.Text;
                 negocio.agregar(nuevo);
+                MessageBox.Show("Nuevo genero agregado");
                 cboGenero.DataSource = negocio.listar();
             }
             catch (Exception ex)

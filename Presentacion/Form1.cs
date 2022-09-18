@@ -70,15 +70,23 @@ namespace Presentacion
            
 
         }
-       
-        
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Disco seleccionado;
+            try
+            {
+                seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                FrmAltaDisco modificar = new FrmAltaDisco(seleccionado);
+                modificar.ShowDialog();
+                cargar();
+            }
+            catch (Exception ex)
+            {
 
-        
-        
-
-
-        
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 
     

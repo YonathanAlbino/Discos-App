@@ -34,7 +34,7 @@
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTituloAltaDisco = new System.Windows.Forms.Label();
             this.txtCantidadCanciones = new System.Windows.Forms.TextBox();
             this.dtpFechaLanzamiento = new System.Windows.Forms.DateTimePicker();
             this.lblTipoEdicion = new System.Windows.Forms.Label();
@@ -104,15 +104,15 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // label1
+            // lblTituloAltaDisco
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(222, 24);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Agregar nuevo disco";
+            this.lblTituloAltaDisco.AutoSize = true;
+            this.lblTituloAltaDisco.Font = new System.Drawing.Font("Arial", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloAltaDisco.Location = new System.Drawing.Point(31, 19);
+            this.lblTituloAltaDisco.Name = "lblTituloAltaDisco";
+            this.lblTituloAltaDisco.Size = new System.Drawing.Size(222, 24);
+            this.lblTituloAltaDisco.TabIndex = 9;
+            this.lblTituloAltaDisco.Text = "Agregar nuevo disco";
             // 
             // txtCantidadCanciones
             // 
@@ -132,7 +132,7 @@
             // lblTipoEdicion
             // 
             this.lblTipoEdicion.AutoSize = true;
-            this.lblTipoEdicion.Location = new System.Drawing.Point(21, 238);
+            this.lblTipoEdicion.Location = new System.Drawing.Point(21, 289);
             this.lblTipoEdicion.Name = "lblTipoEdicion";
             this.lblTipoEdicion.Size = new System.Drawing.Size(80, 13);
             this.lblTipoEdicion.TabIndex = 12;
@@ -141,7 +141,7 @@
             // lblGenero
             // 
             this.lblGenero.AutoSize = true;
-            this.lblGenero.Location = new System.Drawing.Point(21, 197);
+            this.lblGenero.Location = new System.Drawing.Point(23, 252);
             this.lblGenero.Name = "lblGenero";
             this.lblGenero.Size = new System.Drawing.Size(42, 13);
             this.lblGenero.TabIndex = 13;
@@ -150,7 +150,7 @@
             // cboGenero
             // 
             this.cboGenero.FormattingEnabled = true;
-            this.cboGenero.Location = new System.Drawing.Point(151, 189);
+            this.cboGenero.Location = new System.Drawing.Point(151, 244);
             this.cboGenero.Name = "cboGenero";
             this.cboGenero.Size = new System.Drawing.Size(121, 21);
             this.cboGenero.TabIndex = 3;
@@ -158,7 +158,7 @@
             // cboTipoDeEdicion
             // 
             this.cboTipoDeEdicion.FormattingEnabled = true;
-            this.cboTipoDeEdicion.Location = new System.Drawing.Point(151, 230);
+            this.cboTipoDeEdicion.Location = new System.Drawing.Point(151, 281);
             this.cboTipoDeEdicion.Name = "cboTipoDeEdicion";
             this.cboTipoDeEdicion.Size = new System.Drawing.Size(121, 21);
             this.cboTipoDeEdicion.TabIndex = 4;
@@ -166,7 +166,7 @@
             // lblUrlImagen
             // 
             this.lblUrlImagen.AutoSize = true;
-            this.lblUrlImagen.Location = new System.Drawing.Point(23, 289);
+            this.lblUrlImagen.Location = new System.Drawing.Point(21, 208);
             this.lblUrlImagen.Name = "lblUrlImagen";
             this.lblUrlImagen.Size = new System.Drawing.Size(57, 13);
             this.lblUrlImagen.TabIndex = 16;
@@ -174,7 +174,7 @@
             // 
             // txtUrlImagen
             // 
-            this.txtUrlImagen.Location = new System.Drawing.Point(151, 282);
+            this.txtUrlImagen.Location = new System.Drawing.Point(151, 201);
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(200, 20);
             this.txtUrlImagen.TabIndex = 5;
@@ -192,7 +192,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(291, 189);
+            this.label2.Location = new System.Drawing.Point(291, 244);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(116, 13);
             this.label2.TabIndex = 19;
@@ -200,14 +200,14 @@
             // 
             // txtNuevoGenero
             // 
-            this.txtNuevoGenero.Location = new System.Drawing.Point(294, 205);
+            this.txtNuevoGenero.Location = new System.Drawing.Point(294, 260);
             this.txtNuevoGenero.Name = "txtNuevoGenero";
             this.txtNuevoGenero.Size = new System.Drawing.Size(100, 20);
             this.txtNuevoGenero.TabIndex = 20;
             // 
             // btnNuevoGenero
             // 
-            this.btnNuevoGenero.Location = new System.Drawing.Point(413, 197);
+            this.btnNuevoGenero.Location = new System.Drawing.Point(327, 281);
             this.btnNuevoGenero.Name = "btnNuevoGenero";
             this.btnNuevoGenero.Size = new System.Drawing.Size(24, 28);
             this.btnNuevoGenero.TabIndex = 21;
@@ -232,7 +232,7 @@
             this.Controls.Add(this.lblTipoEdicion);
             this.Controls.Add(this.dtpFechaLanzamiento);
             this.Controls.Add(this.txtCantidadCanciones);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTituloAltaDisco);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtTitulo);
@@ -257,7 +257,7 @@
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTituloAltaDisco;
         private System.Windows.Forms.TextBox txtCantidadCanciones;
         private System.Windows.Forms.DateTimePicker dtpFechaLanzamiento;
         private System.Windows.Forms.Label lblTipoEdicion;

@@ -25,7 +25,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Titulo, fechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as Estilo, T.Descripcion as Edicion from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo = E.Id  and T.Id = D.IdTipoEdicion";
+                comando.CommandText = "select D.Id as Id, Titulo, fechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as Estilo, T.Descripcion as Edicion, IdEstilo, IdTipoEdicion from DISCOS D, ESTILOS E, TIPOSEDICION T  where D.IdEstilo = E.Id   and T.Id = D.IdTipoEdicion";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -33,20 +33,26 @@ namespace negocio
 
                 while (lector.Read())
                 {
-                    Disco aux = new Disco(lector.GetString(0), (int)lector["CantidadCanciones"]);
-                    //aux.Titulo = lector.GetString(0);
+                    //Disco aux = new Disco(lector.GetString(0), (int)lector["CantidadCanciones"]);
+                    Disco aux = new Disco();
+
+                    aux.Id = (int)lector["Id"];
+                    aux.Titulo = (string)lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)lector["fechaLanzamiento"];
-                    //aux.CantidadDeCanciones = (int)lector["CantidadCanciones"];
+                    aux.CantidadDeCanciones = (int)lector["CantidadCanciones"];
 
                     if (refactorizar.validarColumnaNula(lector, "UrlImagenTapa"))
                     aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
 
                     aux.Genero = new Estilo();
                     aux.Genero.Descripcion = (string)lector["Estilo"];
+                    aux.Genero.Id = (int)lector["IdEstilo"];
                     aux.Edicion = new TipoDeEdicion();
                     aux.Edicion.Descripcion = (string)lector["Edicion"];
-                    
+                    aux.Edicion.Id = (int)lector["IdTipoEdicion"];
                    
+
+
                     lista.Add(aux);
                 }
 
@@ -67,7 +73,37 @@ namespace negocio
 
             
             
-        } 
+        }
+
+        public void modificar(Disco disco)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("update DISCOS set Titulo = @Titulo, FechaLanzamiento = @FechaLanzamiento, CantidadCanciones = @CantidadCanciones, UrlImagenTapa = @UrlImagenTapa, IdEstilo = @IdEstilo, IdTipoEdicion = @IdTipoEdicion where id = @Id;");
+                datos.setearParametro("@Titulo", disco.Titulo);
+                datos.setearParametro("@FechaLanzamiento", disco.FechaLanzamiento);
+                datos.setearParametro("@CantidadCanciones", disco.CantidadDeCanciones);
+                datos.setearParametro("@UrlImagenTapa", disco.UrlImagenTapa);
+                datos.setearParametro("@IdEstilo", disco.Genero.Id);
+                datos.setearParametro("@IdTipoEdicion", disco.Edicion.Id);
+                datos.setearParametro("@Id", disco.Id);
+
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+           
+           
+        }
 
         public void agregar(Disco nuevo)
         {
