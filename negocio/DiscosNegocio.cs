@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Dominio; //Uso del proyecto (Dominio)
 using System.Data.SqlClient; //Librebria para crear la DB
+using AccesoDatos;
+using acomodando;
+
 
 
 namespace negocio
@@ -30,17 +33,20 @@ namespace negocio
 
                 while (lector.Read())
                 {
-                    Disco aux = new Disco();
-                    aux.Titulo = lector.GetString(0);
+                    Disco aux = new Disco(lector.GetString(0), (int)lector["CantidadCanciones"]);
+                    //aux.Titulo = lector.GetString(0);
                     aux.FechaLanzamiento = (DateTime)lector["fechaLanzamiento"];
-                    aux.CantidadDeCanciones = (int)lector["CantidadCanciones"];
+                    //aux.CantidadDeCanciones = (int)lector["CantidadCanciones"];
+
+                    if (refactorizar.validarColumnaNula(lector, "UrlImagenTapa"))
                     aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
-                    aux.genero = new Estilo();
-                    aux.genero.Descripcion = (string)lector["Estilo"];
+
+                    aux.Genero = new Estilo();
+                    aux.Genero.Descripcion = (string)lector["Estilo"];
                     aux.Edicion = new TipoDeEdicion();
                     aux.Edicion.Descripcion = (string)lector["Edicion"];
                     
-
+                   
                     lista.Add(aux);
                 }
 
@@ -55,9 +61,38 @@ namespace negocio
             finally
             {
                 conexion.Close();
+             
             }
+           
+
             
             
         } 
+
+        public void agregar(Disco nuevo)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();   
+            try
+            {
+                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion, UrlImagenTapa)values(@titulo, @fechaLanzamiento, @CantidadCanciones, @IdEstilo, @IdTipoEdicion, @UrlImagenTapa)");
+                datos.setearParametro("@titulo", nuevo.Titulo);
+                datos.setearParametro("@fechaLanzamiento", nuevo.FechaLanzamiento);
+                datos.setearParametro("@CantidadCanciones", nuevo.CantidadDeCanciones);
+                datos.setearParametro("@IdEstilo", nuevo.Genero.Id);
+                datos.setearParametro("@IdTipoEdicion", nuevo.Edicion.Id);
+                datos.setearParametro("UrlImagenTapa", nuevo.UrlImagenTapa);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+                
+            }
+        }
     }
 }

@@ -53,10 +53,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAltaDisco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAltaDisco.Designer.cs">
+      <DependentUpon>FrmAltaDisco.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAltaDisco.resx">
+      <DependentUpon>FrmAltaDisco.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -81,6 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\acomodando\Acomodando.csproj">
+      <Project>{2f4455e4-5010-4d06-8c7d-b5493637437f}</Project>
+      <Name>Acomodando</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{8aace1f8-ef0d-4f54-89a9-1819d93e64fe}</Project>
       <Name>Dominio</Name>

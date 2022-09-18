@@ -28,6 +28,7 @@ namespace negocio
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 
                     lista.Add(aux);
+                    
                 }
 
                 return lista;
@@ -43,5 +44,24 @@ namespace negocio
             }
         
         }//Select DB
+        public void agregar(Estilo nuevo)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("insert into ESTILOS (Descripcion) values (@Descripcion)");
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

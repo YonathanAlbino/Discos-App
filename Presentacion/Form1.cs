@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio; //Inclusion proyecto Dominio
 using negocio; //Inclusion proyecto negocio
+using acomodando;
+
 
 
 
@@ -26,39 +28,56 @@ namespace Presentacion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DiscosNegocio negocio = new DiscosNegocio();
+            cargar();
 
-            listaDisco = negocio.listar();
-            dgvDiscos.DataSource = listaDisco;
-            OcultarColumna();
-            cargarImagen(listaDisco[0].UrlImagenTapa);
-           
         }
 
-        private void dgvEstilos_SelectionChanged(object sender, EventArgs e)
-        {
-            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.UrlImagenTapa);
-        }
-
-        private void cargarImagen(string imagen)
+        private void cargar()
         {
             try
             {
-                pcbDiscos.Load(imagen);
+                DiscosNegocio negocio = new DiscosNegocio();
+                refactorizar ajuste = new refactorizar();
+
+                listaDisco = negocio.listar();
+                dgvDiscos.DataSource = listaDisco;
+                ajuste.cargarImagen(pcbDiscos, listaDisco[0].UrlImagenTapa);
+                ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
+                ajuste.ocularColumnas(dgvDiscos, "Id");
+                ajuste.FormatoFechaDgv(dgvDiscos, "fechaLanzamiento", "dd-MM-yyyy");
+                dgvDiscos.Columns["fechaLanzamiento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                pcbDiscos.Load("https://vesaliusdental.com/wp-content/uploads/2016/10/orionthemes-placeholder-image.jpg");
+                MessageBox.Show(ex.ToString());
             }
         }
-        private void OcultarColumna()
+        
+        private void dgvEstilos_SelectionChanged(object sender, EventArgs e)
         {
-            dgvDiscos.Columns["UrlImagenTapa"].Visible = false;
+            refactorizar ajuste = new refactorizar();
+            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+            ajuste.cargarImagen(pcbDiscos, seleccionado.UrlImagenTapa);
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            FrmAltaDisco alta = new FrmAltaDisco();
+            alta.ShowDialog();
+            cargar();
+           
+
+        }
+       
         
+
+
+        
+        
+
+
         
     }
 
