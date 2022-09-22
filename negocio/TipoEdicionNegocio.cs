@@ -40,5 +40,45 @@ namespace negocio
             }
             
         }
+
+        public void agregarTipoEdicion(TipoDeEdicion nuevo)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("insert into TIPOSEDICION (Descripcion)values(@Descripcion)");
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarTipoEdicion(TipoDeEdicion seleccionado)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("delete from TIPOSEDICION where Id = @Id");
+                datos.setearParametro("@Id", seleccionado.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

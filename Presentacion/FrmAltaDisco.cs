@@ -27,8 +27,37 @@ namespace Presentacion
             Text = "Modificar Disco";
             this.disco = disco;
             lblTituloAltaDisco.Text = "Modificar Disco";
+
+            lblEliminarGenero.Visible = false;
+            btnEliminarGenero.Visible = false;
+            lblAgregarGenero.Visible = false;
+            txtNuevoGenero.Visible = false;
+            btnNuevoGenero.Visible = false;
+
+            lblNuevaEdicion.Visible = false;
+            txtNuevaEdicion.Visible = false;
+            btnAgergarEdicion.Visible = false;
+            lblEliminarTipoEdicion.Visible = false;
+            btnEliminarTipoEdicion.Visible = false;
+
+            lblTipoEdicion.Location = new Point(x: 19, y: 295);
+            cboTipoDeEdicion.Location = new Point(x: 151, y: 288);
+
+            btnAceptar.Location = new Point(x: 22, y: 331);
+            btnCancelar.Location = new Point(x: 122, y: 331);
+
+            pcbImagenDiscoAlta.Location = new Point(x: 395, y: 60);
+            pcbImagenDiscoAlta.Size = new Size(width: 290, height: 300);
+            pcbImagenDiscoAlta.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            btnEliminarLogicoGener.Visible = false;
+            btnEliminarLogicoGenero.Visible = false;
+
+            Width = 800;
+            Height = 480;
         }
         private Disco disco = null;
+        private bool actualizarDgv = false;
 
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -55,11 +84,13 @@ namespace Presentacion
                 if (disco.Id != 0) {
                     negocio.modificar(disco);
                     MessageBox.Show("Modificado exitosamente");
+                    actualizarDgv = true;
                 }
                 else
                 {
                     negocio.agregar(disco);
                     MessageBox.Show("Agregado exitosamente");
+                    actualizarDgv = true;
                 }
                 Close();
             }
@@ -69,6 +100,11 @@ namespace Presentacion
             }
             
             
+        }
+
+        public bool actuclizarDgv()
+        {
+            return actualizarDgv;
         }
 
         private void FrmAltaDisco_Load(object sender, EventArgs e)
@@ -137,6 +173,86 @@ namespace Presentacion
                 negocio.agregar(nuevo);
                 MessageBox.Show("Nuevo genero agregado");
                 cboGenero.DataSource = negocio.listar();
+                txtNuevoGenero.Text = "";
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnEliminarGenero_Click(object sender, EventArgs e)
+        {
+            Estilo seleccionado;
+            EstiloNegocio negocio = new EstiloNegocio();
+            try
+            {
+                if (refactorizar.ValidarEliminacion())
+                {
+                    seleccionado = (Estilo)cboGenero.SelectedItem;
+                    negocio.eliminarFisico(seleccionado);
+                    cboGenero.DataSource = negocio.listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnAgergarEdicion_Click(object sender, EventArgs e)
+        {
+            TipoEdicionNegocio negocio = new TipoEdicionNegocio();
+            TipoDeEdicion nuevo = new TipoDeEdicion();
+            try
+            {   
+                nuevo.Descripcion = txtNuevaEdicion.Text;
+                negocio.agregarTipoEdicion(nuevo);
+                MessageBox.Show("Nuevo tipo de edición agregado");
+                cboTipoDeEdicion.DataSource = negocio.listar();
+               txtNuevaEdicion.Text = "";
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnEliminarTipoEdicion_Click(object sender, EventArgs e)
+        {
+            TipoDeEdicion seleccionado;
+            TipoEdicionNegocio negocio = new TipoEdicionNegocio();
+            try
+            {
+                if (refactorizar.ValidarEliminacion())
+                {
+                    seleccionado = (TipoDeEdicion)cboTipoDeEdicion.SelectedItem;
+                    negocio.eliminarTipoEdicion(seleccionado);
+                    cboTipoDeEdicion.DataSource = negocio.listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnEliminarLogicoGenero_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (refactorizar.ValidarEliminacion())
+                {
+                    EstiloNegocio negocio = new EstiloNegocio();
+                    Estilo seleccionado;
+                    seleccionado = (Estilo)cboGenero.SelectedItem;
+                    negocio.eliminarLogico(seleccionado.Id);
+                    cboGenero.DataSource = negocio.listar();
+                }
             }
             catch (Exception ex)
             {

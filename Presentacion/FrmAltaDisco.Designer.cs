@@ -44,9 +44,18 @@
             this.lblUrlImagen = new System.Windows.Forms.Label();
             this.txtUrlImagen = new System.Windows.Forms.TextBox();
             this.pcbImagenDiscoAlta = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblAgregarGenero = new System.Windows.Forms.Label();
             this.txtNuevoGenero = new System.Windows.Forms.TextBox();
             this.btnNuevoGenero = new System.Windows.Forms.Button();
+            this.lblEliminarGenero = new System.Windows.Forms.Label();
+            this.btnEliminarGenero = new System.Windows.Forms.Button();
+            this.lblNuevaEdicion = new System.Windows.Forms.Label();
+            this.txtNuevaEdicion = new System.Windows.Forms.TextBox();
+            this.btnAgergarEdicion = new System.Windows.Forms.Button();
+            this.lblEliminarTipoEdicion = new System.Windows.Forms.Label();
+            this.btnEliminarTipoEdicion = new System.Windows.Forms.Button();
+            this.btnEliminarLogicoGener = new System.Windows.Forms.Label();
+            this.btnEliminarLogicoGenero = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcbImagenDiscoAlta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,20 +95,20 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(26, 342);
+            this.btnAceptar.Location = new System.Drawing.Point(26, 490);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 6;
+            this.btnAceptar.TabIndex = 8;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(178, 342);
+            this.btnCancelar.Location = new System.Drawing.Point(178, 490);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -132,7 +141,7 @@
             // lblTipoEdicion
             // 
             this.lblTipoEdicion.AutoSize = true;
-            this.lblTipoEdicion.Location = new System.Drawing.Point(21, 289);
+            this.lblTipoEdicion.Location = new System.Drawing.Point(21, 357);
             this.lblTipoEdicion.Name = "lblTipoEdicion";
             this.lblTipoEdicion.Size = new System.Drawing.Size(80, 13);
             this.lblTipoEdicion.TabIndex = 12;
@@ -141,7 +150,7 @@
             // lblGenero
             // 
             this.lblGenero.AutoSize = true;
-            this.lblGenero.Location = new System.Drawing.Point(23, 252);
+            this.lblGenero.Location = new System.Drawing.Point(23, 260);
             this.lblGenero.Name = "lblGenero";
             this.lblGenero.Size = new System.Drawing.Size(42, 13);
             this.lblGenero.TabIndex = 13;
@@ -150,18 +159,18 @@
             // cboGenero
             // 
             this.cboGenero.FormattingEnabled = true;
-            this.cboGenero.Location = new System.Drawing.Point(151, 244);
+            this.cboGenero.Location = new System.Drawing.Point(151, 252);
             this.cboGenero.Name = "cboGenero";
             this.cboGenero.Size = new System.Drawing.Size(121, 21);
-            this.cboGenero.TabIndex = 3;
+            this.cboGenero.TabIndex = 4;
             // 
             // cboTipoDeEdicion
             // 
             this.cboTipoDeEdicion.FormattingEnabled = true;
-            this.cboTipoDeEdicion.Location = new System.Drawing.Point(151, 281);
+            this.cboTipoDeEdicion.Location = new System.Drawing.Point(151, 357);
             this.cboTipoDeEdicion.Name = "cboTipoDeEdicion";
             this.cboTipoDeEdicion.Size = new System.Drawing.Size(121, 21);
-            this.cboTipoDeEdicion.TabIndex = 4;
+            this.cboTipoDeEdicion.TabIndex = 6;
             // 
             // lblUrlImagen
             // 
@@ -177,37 +186,37 @@
             this.txtUrlImagen.Location = new System.Drawing.Point(151, 201);
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(200, 20);
-            this.txtUrlImagen.TabIndex = 5;
+            this.txtUrlImagen.TabIndex = 3;
             this.txtUrlImagen.Leave += new System.EventHandler(this.txtUrlImagen_Leave);
             // 
             // pcbImagenDiscoAlta
             // 
-            this.pcbImagenDiscoAlta.Location = new System.Drawing.Point(524, 70);
+            this.pcbImagenDiscoAlta.Location = new System.Drawing.Point(544, 158);
             this.pcbImagenDiscoAlta.Name = "pcbImagenDiscoAlta";
             this.pcbImagenDiscoAlta.Size = new System.Drawing.Size(216, 232);
             this.pcbImagenDiscoAlta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pcbImagenDiscoAlta.TabIndex = 18;
             this.pcbImagenDiscoAlta.TabStop = false;
             // 
-            // label2
+            // lblAgregarGenero
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(291, 244);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Agregar nuevo género:";
+            this.lblAgregarGenero.AutoSize = true;
+            this.lblAgregarGenero.Location = new System.Drawing.Point(19, 295);
+            this.lblAgregarGenero.Name = "lblAgregarGenero";
+            this.lblAgregarGenero.Size = new System.Drawing.Size(116, 13);
+            this.lblAgregarGenero.TabIndex = 19;
+            this.lblAgregarGenero.Text = "Agregar nuevo género:";
             // 
             // txtNuevoGenero
             // 
-            this.txtNuevoGenero.Location = new System.Drawing.Point(294, 260);
+            this.txtNuevoGenero.Location = new System.Drawing.Point(151, 288);
             this.txtNuevoGenero.Name = "txtNuevoGenero";
-            this.txtNuevoGenero.Size = new System.Drawing.Size(100, 20);
-            this.txtNuevoGenero.TabIndex = 20;
+            this.txtNuevoGenero.Size = new System.Drawing.Size(124, 20);
+            this.txtNuevoGenero.TabIndex = 5;
             // 
             // btnNuevoGenero
             // 
-            this.btnNuevoGenero.Location = new System.Drawing.Point(327, 281);
+            this.btnNuevoGenero.Location = new System.Drawing.Point(281, 283);
             this.btnNuevoGenero.Name = "btnNuevoGenero";
             this.btnNuevoGenero.Size = new System.Drawing.Size(24, 28);
             this.btnNuevoGenero.TabIndex = 21;
@@ -215,14 +224,106 @@
             this.btnNuevoGenero.UseVisualStyleBackColor = true;
             this.btnNuevoGenero.Click += new System.EventHandler(this.btnNuevoGenero_Click);
             // 
+            // lblEliminarGenero
+            // 
+            this.lblEliminarGenero.AutoSize = true;
+            this.lblEliminarGenero.Location = new System.Drawing.Point(326, 260);
+            this.lblEliminarGenero.Name = "lblEliminarGenero";
+            this.lblEliminarGenero.Size = new System.Drawing.Size(120, 13);
+            this.lblEliminarGenero.TabIndex = 22;
+            this.lblEliminarGenero.Text = "Eliminar (Físico) genero ";
+            // 
+            // btnEliminarGenero
+            // 
+            this.btnEliminarGenero.Location = new System.Drawing.Point(443, 252);
+            this.btnEliminarGenero.Name = "btnEliminarGenero";
+            this.btnEliminarGenero.Size = new System.Drawing.Size(19, 21);
+            this.btnEliminarGenero.TabIndex = 23;
+            this.btnEliminarGenero.Text = "-";
+            this.btnEliminarGenero.UseVisualStyleBackColor = true;
+            this.btnEliminarGenero.Click += new System.EventHandler(this.btnEliminarGenero_Click);
+            // 
+            // lblNuevaEdicion
+            // 
+            this.lblNuevaEdicion.AutoSize = true;
+            this.lblNuevaEdicion.Location = new System.Drawing.Point(19, 397);
+            this.lblNuevaEdicion.Name = "lblNuevaEdicion";
+            this.lblNuevaEdicion.Size = new System.Drawing.Size(146, 13);
+            this.lblNuevaEdicion.TabIndex = 24;
+            this.lblNuevaEdicion.Text = "Agregar nuevo tipo de edicin:";
+            // 
+            // txtNuevaEdicion
+            // 
+            this.txtNuevaEdicion.Location = new System.Drawing.Point(171, 394);
+            this.txtNuevaEdicion.Name = "txtNuevaEdicion";
+            this.txtNuevaEdicion.Size = new System.Drawing.Size(100, 20);
+            this.txtNuevaEdicion.TabIndex = 7;
+            // 
+            // btnAgergarEdicion
+            // 
+            this.btnAgergarEdicion.Location = new System.Drawing.Point(280, 389);
+            this.btnAgergarEdicion.Name = "btnAgergarEdicion";
+            this.btnAgergarEdicion.Size = new System.Drawing.Size(25, 29);
+            this.btnAgergarEdicion.TabIndex = 26;
+            this.btnAgergarEdicion.Text = "+";
+            this.btnAgergarEdicion.UseVisualStyleBackColor = true;
+            this.btnAgergarEdicion.Click += new System.EventHandler(this.btnAgergarEdicion_Click);
+            // 
+            // lblEliminarTipoEdicion
+            // 
+            this.lblEliminarTipoEdicion.AutoSize = true;
+            this.lblEliminarTipoEdicion.Location = new System.Drawing.Point(326, 365);
+            this.lblEliminarTipoEdicion.Name = "lblEliminarTipoEdicion";
+            this.lblEliminarTipoEdicion.Size = new System.Drawing.Size(156, 13);
+            this.lblEliminarTipoEdicion.TabIndex = 27;
+            this.lblEliminarTipoEdicion.Text = "Eliminar (Físico) tipo de edicion:";
+            // 
+            // btnEliminarTipoEdicion
+            // 
+            this.btnEliminarTipoEdicion.Location = new System.Drawing.Point(488, 361);
+            this.btnEliminarTipoEdicion.Name = "btnEliminarTipoEdicion";
+            this.btnEliminarTipoEdicion.Size = new System.Drawing.Size(23, 21);
+            this.btnEliminarTipoEdicion.TabIndex = 28;
+            this.btnEliminarTipoEdicion.Text = "-";
+            this.btnEliminarTipoEdicion.UseVisualStyleBackColor = true;
+            this.btnEliminarTipoEdicion.Click += new System.EventHandler(this.btnEliminarTipoEdicion_Click);
+            // 
+            // btnEliminarLogicoGener
+            // 
+            this.btnEliminarLogicoGener.AutoSize = true;
+            this.btnEliminarLogicoGener.Location = new System.Drawing.Point(326, 298);
+            this.btnEliminarLogicoGener.Name = "btnEliminarLogicoGener";
+            this.btnEliminarLogicoGener.Size = new System.Drawing.Size(123, 13);
+            this.btnEliminarLogicoGener.TabIndex = 29;
+            this.btnEliminarLogicoGener.Text = "Eliminar (Lógico) genero ";
+            // 
+            // btnEliminarLogicoGenero
+            // 
+            this.btnEliminarLogicoGenero.Location = new System.Drawing.Point(455, 294);
+            this.btnEliminarLogicoGenero.Name = "btnEliminarLogicoGenero";
+            this.btnEliminarLogicoGenero.Size = new System.Drawing.Size(19, 21);
+            this.btnEliminarLogicoGenero.TabIndex = 30;
+            this.btnEliminarLogicoGenero.Text = "-";
+            this.btnEliminarLogicoGenero.UseVisualStyleBackColor = true;
+            this.btnEliminarLogicoGenero.Click += new System.EventHandler(this.btnEliminarLogicoGenero_Click);
+            // 
             // FrmAltaDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 398);
+            this.ClientSize = new System.Drawing.Size(806, 587);
+            this.Controls.Add(this.btnEliminarLogicoGenero);
+            this.Controls.Add(this.btnEliminarLogicoGener);
+            this.Controls.Add(this.btnEliminarTipoEdicion);
+            this.Controls.Add(this.lblEliminarTipoEdicion);
+            this.Controls.Add(this.btnAgergarEdicion);
+            this.Controls.Add(this.txtNuevaEdicion);
+            this.Controls.Add(this.lblNuevaEdicion);
+            this.Controls.Add(this.btnEliminarGenero);
+            this.Controls.Add(this.lblEliminarGenero);
             this.Controls.Add(this.btnNuevoGenero);
             this.Controls.Add(this.txtNuevoGenero);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblAgregarGenero);
             this.Controls.Add(this.pcbImagenDiscoAlta);
             this.Controls.Add(this.txtUrlImagen);
             this.Controls.Add(this.lblUrlImagen);
@@ -267,8 +368,17 @@
         private System.Windows.Forms.Label lblUrlImagen;
         private System.Windows.Forms.TextBox txtUrlImagen;
         private System.Windows.Forms.PictureBox pcbImagenDiscoAlta;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblAgregarGenero;
         private System.Windows.Forms.TextBox txtNuevoGenero;
         private System.Windows.Forms.Button btnNuevoGenero;
+        private System.Windows.Forms.Label lblEliminarGenero;
+        private System.Windows.Forms.Button btnEliminarGenero;
+        private System.Windows.Forms.Label lblNuevaEdicion;
+        private System.Windows.Forms.TextBox txtNuevaEdicion;
+        private System.Windows.Forms.Button btnAgergarEdicion;
+        private System.Windows.Forms.Label lblEliminarTipoEdicion;
+        private System.Windows.Forms.Button btnEliminarTipoEdicion;
+        private System.Windows.Forms.Label btnEliminarLogicoGener;
+        private System.Windows.Forms.Button btnEliminarLogicoGenero;
     }
 }

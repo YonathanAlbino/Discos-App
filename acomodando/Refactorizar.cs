@@ -13,7 +13,7 @@ namespace acomodando
         public void ocularColumnas(DataGridView grilla, string columna)
         {
             try
-            {
+            {   
                 grilla.Columns[columna].Visible = false;
             }
             catch (Exception ex)
@@ -66,7 +66,26 @@ namespace acomodando
             }
 
         }
-     
+
+        public static bool ValidarEliminacion()
+        {
+            DialogResult respuesta = MessageBox.Show("¿De verdad querés eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (respuesta == DialogResult.Yes)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool ValidarSiNo(string texto, string titulo)
+        {
+            DialogResult respuesta = MessageBox.Show(texto, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (respuesta == DialogResult.Yes)
+                return true;
+            else
+                return false;
+        }
+
+
 
     }
 }

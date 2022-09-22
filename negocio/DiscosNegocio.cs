@@ -14,7 +14,8 @@ namespace negocio
 {
     public class DiscosNegocio
     {
-        public List<Disco> listar() //Select discos DB
+        
+        public List<Disco> listar(bool datosEliminados = false) //Select discos DB
         {
             List<Disco> lista = new List<Disco>();
             SqlConnection conexion = new SqlConnection();
@@ -25,7 +26,12 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select D.Id as Id, Titulo, fechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as Estilo, T.Descripcion as Edicion, IdEstilo, IdTipoEdicion from DISCOS D, ESTILOS E, TIPOSEDICION T  where D.IdEstilo = E.Id   and T.Id = D.IdTipoEdicion";
+                if (datosEliminados)
+                    comando.CommandText = "select D.Id as Id, Titulo, fechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as Estilo, T.Descripcion as Edicion, IdEstilo, IdTipoEdicion, D.Activo as eliminado from DISCOS D, ESTILOS E, TIPOSEDICION T  where D.IdEstilo = E.Id   and T.Id = D.IdTipoEdicion and D.Activo = 0  ";
+                else
+                {
+                    comando.CommandText = "select D.Id as Id, Titulo, fechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as Estilo, T.Descripcion as Edicion, IdEstilo, IdTipoEdicion, D.Activo AS eliminado from DISCOS D, ESTILOS E, TIPOSEDICION T  where D.IdEstilo = E.Id   and T.Id = D.IdTipoEdicion and D.Activo = 1";
+                } 
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -40,6 +46,8 @@ namespace negocio
                     aux.Titulo = (string)lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)lector["fechaLanzamiento"];
                     aux.CantidadDeCanciones = (int)lector["CantidadCanciones"];
+                    aux.Eliminado = (int)lector["eliminado"];
+                    
 
                     if (refactorizar.validarColumnaNula(lector, "UrlImagenTapa"))
                     aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
@@ -50,9 +58,7 @@ namespace negocio
                     aux.Edicion = new TipoDeEdicion();
                     aux.Edicion.Descripcion = (string)lector["Edicion"];
                     aux.Edicion.Id = (int)lector["IdTipoEdicion"];
-                   
-
-
+                    
                     lista.Add(aux);
                 }
 
@@ -110,13 +116,14 @@ namespace negocio
             AccesoDatosCentral datos = new AccesoDatosCentral();   
             try
             {
-                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion, UrlImagenTapa)values(@titulo, @fechaLanzamiento, @CantidadCanciones, @IdEstilo, @IdTipoEdicion, @UrlImagenTapa)");
+                datos.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion, UrlImagenTapa, Activo)values(@titulo, @fechaLanzamiento, @CantidadCanciones, @IdEstilo, @IdTipoEdicion, @UrlImagenTapa, @Activo)");
                 datos.setearParametro("@titulo", nuevo.Titulo);
                 datos.setearParametro("@fechaLanzamiento", nuevo.FechaLanzamiento);
                 datos.setearParametro("@CantidadCanciones", nuevo.CantidadDeCanciones);
                 datos.setearParametro("@IdEstilo", nuevo.Genero.Id);
                 datos.setearParametro("@IdTipoEdicion", nuevo.Edicion.Id);
                 datos.setearParametro("UrlImagenTapa", nuevo.UrlImagenTapa);
+                datos.setearParametro("@Activo", 1);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -128,6 +135,61 @@ namespace negocio
             {
                 datos.cerrarConexion();
                 
+            }
+        }
+
+        public void restaurar(int id)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("update DISCOS set Activo = 1 where id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarFisico(int id)
+        {
+            try
+            {
+                AccesoDatosCentral datos = new AccesoDatosCentral();
+                datos.setearConsulta("Delete from DISCOS where Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void EliminarLogico(int Id)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("update DISCOS set Activo = 0 where id = @Id");
+                datos.setearParametro("@Id", Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

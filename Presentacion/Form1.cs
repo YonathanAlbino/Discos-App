@@ -25,7 +25,8 @@ namespace Presentacion
         }
 
         private List<Disco> listaDisco;
-
+        //private List<Disco> listaDiscosEliminados;
+        private refactorizar ajuste = new refactorizar();
         private void Form1_Load(object sender, EventArgs e)
         {
             cargar();
@@ -44,8 +45,12 @@ namespace Presentacion
                 ajuste.cargarImagen(pcbDiscos, listaDisco[0].UrlImagenTapa);
                 ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
                 ajuste.ocularColumnas(dgvDiscos, "Id");
+                ajuste.ocularColumnas(dgvDiscos, "Eliminado");
                 ajuste.FormatoFechaDgv(dgvDiscos, "fechaLanzamiento", "dd-MM-yyyy");
                 dgvDiscos.Columns["fechaLanzamiento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                btnRestaurar.Visible = false;
+                lblCerrarDiscosEliminados.Visible = false;
+
 
             }
             catch (Exception ex)
@@ -54,20 +59,24 @@ namespace Presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
-        
+
         private void dgvEstilos_SelectionChanged(object sender, EventArgs e)
         {
             refactorizar ajuste = new refactorizar();
-            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            ajuste.cargarImagen(pcbDiscos, seleccionado.UrlImagenTapa);
+            if(dgvDiscos.CurrentRow != null)
+            {
+                Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                ajuste.cargarImagen(pcbDiscos, seleccionado.UrlImagenTapa);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             FrmAltaDisco alta = new FrmAltaDisco();
             alta.ShowDialog();
-            cargar();
-           
+            if (alta.actuclizarDgv())
+                cargar();
+
 
         }
 
@@ -79,7 +88,8 @@ namespace Presentacion
                 seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
                 FrmAltaDisco modificar = new FrmAltaDisco(seleccionado);
                 modificar.ShowDialog();
-                cargar();
+                if (modificar.actuclizarDgv())
+                    cargar();
             }
             catch (Exception ex)
             {
@@ -87,7 +97,117 @@ namespace Presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
+        private void eliminar(bool logico = false)
+        {
+            Disco seleccionado;
+            try
+            {
+                if (refactorizar.ValidarEliminacion())
+                {
+                    DiscosNegocio negocio = new DiscosNegocio();
+                    seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                    if (logico)
+                        negocio.EliminarLogico(seleccionado.Id);
+                    else
+                        negocio.eliminarFisico(seleccionado.Id);
+
+
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            eliminar();
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            eliminar(true);
+        }
+
+        private void btnVerDiscosEliminados_Click(object sender, EventArgs e)
+        {
+            DiscosNegocio negocio = new DiscosNegocio();
+            try
+            {
+                dgvDiscos.DataSource = negocio.listar(true);
+                btnRestaurar.Visible = true;
+                lblCerrarDiscosEliminados.Visible = true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {   DiscosNegocio negocio = new DiscosNegocio();
+            try
+            {
+                dgvDiscos.DataSource = negocio.listar();
+                lblCerrarDiscosEliminados.Visible = false;
+                btnRestaurar.Visible = false;
+            }
+            catch (Exception ex) 
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Disco seleccionado;
+            DiscosNegocio negocio = new DiscosNegocio();
+            try
+            {
+                if (refactorizar.ValidarSiNo("¿Esta seguro que quiere restaurar el disco?", "Restaurar")){
+                    seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                    negocio.restaurar(seleccionado.Id);
+                    dgvDiscos.DataSource = negocio.listar(true);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnFiltroRapido_Click(object sender, EventArgs e)
+        {
+            List<Disco> listaFiltrada;
+            string filtro = txtFiltroRapido.Text;
+
+            if (filtro != "")
+            {
+                listaFiltrada = listaDisco.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Edicion.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaDisco;
+            }
+
+            dgvDiscos.DataSource = null;
+            dgvDiscos.DataSource = listaFiltrada;
+
+            ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
+            ajuste.ocularColumnas(dgvDiscos, "Id");
+            ajuste.ocularColumnas(dgvDiscos, "Eliminado");
+        }
     }
 
     
 }
+    
+
+    
+

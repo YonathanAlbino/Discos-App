@@ -42,8 +42,8 @@ namespace Dominio
         public Estilo Genero { get; set; }
         [DisplayName("Edición")]
         public TipoDeEdicion Edicion { get; set; }
+        public int Eliminado { get; set; }
 
-        
 
     }
 }

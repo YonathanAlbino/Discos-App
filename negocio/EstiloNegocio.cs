@@ -18,7 +18,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("select Id, Descripcion from ESTILOS");
+                datos.setearConsulta("select Id, Descripcion from ESTILOS where Activo = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -51,6 +51,42 @@ namespace negocio
             {
                 datos.setearConsulta("insert into ESTILOS (Descripcion) values (@Descripcion)");
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarFisico(Estilo estilo)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("delete from ESTILOS where Id = @id");
+                datos.setearParametro("@id",estilo.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public void eliminarLogico(int id)
+        {
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                datos.setearConsulta("update ESTILOS set Activo = 0 where id = @Id ");
+                datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
