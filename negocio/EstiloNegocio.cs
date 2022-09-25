@@ -18,7 +18,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("select Id, Descripcion from ESTILOS where Activo = 1");
+                datos.setearConsulta("select Id, Descripcion from ESTILOS");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -80,24 +80,24 @@ namespace negocio
             }
         }
 
-        public void eliminarLogico(int id)
-        {
-            AccesoDatosCentral datos = new AccesoDatosCentral();
-            try
-            {
-                datos.setearConsulta("update ESTILOS set Activo = 0 where id = @Id ");
-                datos.setearParametro("@Id", id);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
+        //public void eliminarLogico(int id)
+        //{
+        //    AccesoDatosCentral datos = new AccesoDatosCentral();
+        //    try
+        //    {
+        //        datos.setearConsulta("update ESTILOS set Activo = 0 where id = @Id ");
+        //        datos.setearParametro("@Id", id);
+        //        datos.ejecutarAccion();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
     }
 }

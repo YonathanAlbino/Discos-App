@@ -50,14 +50,16 @@ namespace Presentacion
             pcbImagenDiscoAlta.Size = new Size(width: 290, height: 300);
             pcbImagenDiscoAlta.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            btnEliminarLogicoGener.Visible = false;
-            btnEliminarLogicoGenero.Visible = false;
+          
 
             Width = 800;
             Height = 480;
         }
         private Disco disco = null;
         private bool actualizarDgv = false;
+        List<Estilo> listaEstilos = new List<Estilo>();
+        
+       
 
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -114,7 +116,8 @@ namespace Presentacion
             refactorizar ajustes = new refactorizar();
             try
             {
-                cboGenero.DataSource = estiloNegocio.listar();
+                listaEstilos = estiloNegocio.listar();
+                cboGenero.DataSource = listaEstilos; //estiloNegocio.listar();
                 cboGenero.ValueMember = "Id";
                 cboGenero.DisplayMember = "Descripcion";
                 cboTipoDeEdicion.DataSource = tipoEdicionNegocio.listar();
@@ -243,22 +246,7 @@ namespace Presentacion
 
         private void btnEliminarLogicoGenero_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (refactorizar.ValidarEliminacion())
-                {
-                    EstiloNegocio negocio = new EstiloNegocio();
-                    Estilo seleccionado;
-                    seleccionado = (Estilo)cboGenero.SelectedItem;
-                    negocio.eliminarLogico(seleccionado.Id);
-                    cboGenero.DataSource = negocio.listar();
-                }
-            }
-            catch (Exception ex)
-            {
 
-                MessageBox.Show(ex.ToString());
-            }
         }
     }
 }

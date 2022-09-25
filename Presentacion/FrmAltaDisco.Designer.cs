@@ -54,8 +54,6 @@
             this.btnAgergarEdicion = new System.Windows.Forms.Button();
             this.lblEliminarTipoEdicion = new System.Windows.Forms.Label();
             this.btnEliminarTipoEdicion = new System.Windows.Forms.Button();
-            this.btnEliminarLogicoGener = new System.Windows.Forms.Label();
-            this.btnEliminarLogicoGenero = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcbImagenDiscoAlta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -288,32 +286,11 @@
             this.btnEliminarTipoEdicion.UseVisualStyleBackColor = true;
             this.btnEliminarTipoEdicion.Click += new System.EventHandler(this.btnEliminarTipoEdicion_Click);
             // 
-            // btnEliminarLogicoGener
-            // 
-            this.btnEliminarLogicoGener.AutoSize = true;
-            this.btnEliminarLogicoGener.Location = new System.Drawing.Point(326, 298);
-            this.btnEliminarLogicoGener.Name = "btnEliminarLogicoGener";
-            this.btnEliminarLogicoGener.Size = new System.Drawing.Size(123, 13);
-            this.btnEliminarLogicoGener.TabIndex = 29;
-            this.btnEliminarLogicoGener.Text = "Eliminar (Lógico) genero ";
-            // 
-            // btnEliminarLogicoGenero
-            // 
-            this.btnEliminarLogicoGenero.Location = new System.Drawing.Point(455, 294);
-            this.btnEliminarLogicoGenero.Name = "btnEliminarLogicoGenero";
-            this.btnEliminarLogicoGenero.Size = new System.Drawing.Size(19, 21);
-            this.btnEliminarLogicoGenero.TabIndex = 30;
-            this.btnEliminarLogicoGenero.Text = "-";
-            this.btnEliminarLogicoGenero.UseVisualStyleBackColor = true;
-            this.btnEliminarLogicoGenero.Click += new System.EventHandler(this.btnEliminarLogicoGenero_Click);
-            // 
             // FrmAltaDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 587);
-            this.Controls.Add(this.btnEliminarLogicoGenero);
-            this.Controls.Add(this.btnEliminarLogicoGener);
             this.Controls.Add(this.btnEliminarTipoEdicion);
             this.Controls.Add(this.lblEliminarTipoEdicion);
             this.Controls.Add(this.btnAgergarEdicion);
@@ -378,7 +355,5 @@
         private System.Windows.Forms.Button btnAgergarEdicion;
         private System.Windows.Forms.Label lblEliminarTipoEdicion;
         private System.Windows.Forms.Button btnEliminarTipoEdicion;
-        private System.Windows.Forms.Label btnEliminarLogicoGener;
-        private System.Windows.Forms.Button btnEliminarLogicoGenero;
     }
 }

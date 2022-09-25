@@ -87,11 +87,11 @@
             // 
             // btnEliminarFisico
             // 
-            this.btnEliminarFisico.Location = new System.Drawing.Point(214, 374);
+            this.btnEliminarFisico.Location = new System.Drawing.Point(190, 374);
             this.btnEliminarFisico.Name = "btnEliminarFisico";
-            this.btnEliminarFisico.Size = new System.Drawing.Size(79, 23);
+            this.btnEliminarFisico.Size = new System.Drawing.Size(139, 23);
             this.btnEliminarFisico.TabIndex = 4;
-            this.btnEliminarFisico.Text = "Eliminar fisico";
+            this.btnEliminarFisico.Text = "Eliminar permanentemente";
             this.btnEliminarFisico.UseVisualStyleBackColor = true;
             this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
             // 

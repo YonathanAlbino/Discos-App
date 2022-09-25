@@ -25,7 +25,7 @@ namespace Presentacion
         }
 
         private List<Disco> listaDisco;
-        //private List<Disco> listaDiscosEliminados;
+        private List<Disco> listaDiscosEliminados = new List<Disco>();
         private refactorizar ajuste = new refactorizar();
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -42,7 +42,12 @@ namespace Presentacion
 
                 listaDisco = negocio.listar();
                 dgvDiscos.DataSource = listaDisco;
+
+                
+               
+                if(listaDisco.Count > 0)
                 ajuste.cargarImagen(pcbDiscos, listaDisco[0].UrlImagenTapa);
+                
                 ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
                 ajuste.ocularColumnas(dgvDiscos, "Id");
                 ajuste.ocularColumnas(dgvDiscos, "Eliminado");
@@ -50,6 +55,7 @@ namespace Presentacion
                 dgvDiscos.Columns["fechaLanzamiento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 btnRestaurar.Visible = false;
                 lblCerrarDiscosEliminados.Visible = false;
+                btnEliminarFisico.Visible = false;
 
 
             }
@@ -109,7 +115,10 @@ namespace Presentacion
                     if (logico)
                         negocio.EliminarLogico(seleccionado.Id);
                     else
+                    {
                         negocio.eliminarFisico(seleccionado.Id);
+                        
+                    }
 
 
                     cargar();
@@ -124,7 +133,28 @@ namespace Presentacion
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
-            eliminar();
+            DiscosNegocio negocio = new DiscosNegocio();
+            try
+            {
+                if(refactorizar.ValidarSiNo("¿Esta seguro que desea borrar el disco de forma permanente?....", "Eliminando...."))
+                {
+                    Disco seleccionado;
+                    seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                    negocio.eliminarFisico(seleccionado.Id);
+                    dgvDiscos.DataSource = null;
+                    dgvDiscos.DataSource = negocio.listar(true);
+                    ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
+                    ajuste.ocularColumnas(dgvDiscos, "Id");
+                    ajuste.ocularColumnas(dgvDiscos, "Eliminado");
+                    ajuste.FormatoFechaDgv(dgvDiscos, "fechaLanzamiento", "dd-MM-yyyy");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnEliminarLogico_Click(object sender, EventArgs e)
@@ -138,8 +168,14 @@ namespace Presentacion
             try
             {
                 dgvDiscos.DataSource = negocio.listar(true);
+                
                 btnRestaurar.Visible = true;
                 lblCerrarDiscosEliminados.Visible = true;
+                btnEliminarLogico.Visible = false;
+                btnEliminarFisico.Visible = true;
+                btnRestaurar.Location = new Point(x: 328, y: 374); 
+                btnAgregar.Enabled = false;
+                btnModificar.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -155,6 +191,10 @@ namespace Presentacion
                 dgvDiscos.DataSource = negocio.listar();
                 lblCerrarDiscosEliminados.Visible = false;
                 btnRestaurar.Visible = false;
+                btnEliminarLogico.Visible = true;
+                btnEliminarFisico.Visible = false;
+                btnAgregar.Enabled = true;
+                btnModificar.Enabled = true;
             }
             catch (Exception ex) 
             {
@@ -173,6 +213,7 @@ namespace Presentacion
                     seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
                     negocio.restaurar(seleccionado.Id);
                     dgvDiscos.DataSource = negocio.listar(true);
+                    
                 }
             }
             catch (Exception ex)
