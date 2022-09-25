@@ -28,7 +28,7 @@ namespace Presentacion
             this.disco = disco;
             lblTituloAltaDisco.Text = "Modificar Disco";
 
-            lblEliminarGenero.Visible = false;
+           
             btnEliminarGenero.Visible = false;
             lblAgregarGenero.Visible = false;
             txtNuevoGenero.Visible = false;
@@ -37,7 +37,7 @@ namespace Presentacion
             lblNuevaEdicion.Visible = false;
             txtNuevaEdicion.Visible = false;
             btnAgergarEdicion.Visible = false;
-            lblEliminarTipoEdicion.Visible = false;
+            
             btnEliminarTipoEdicion.Visible = false;
 
             lblTipoEdicion.Location = new Point(x: 19, y: 295);
@@ -168,10 +168,16 @@ namespace Presentacion
 
         private void btnNuevoGenero_Click(object sender, EventArgs e)
         {
-           Estilo nuevo = new Estilo();
-           EstiloNegocio negocio = new EstiloNegocio();
             try
             {
+                if(refactorizar.ExisteSiNoEstilo(txtNuevoGenero.Text, cboGenero))
+                {
+                    MessageBox.Show("Ya existe un genero con ese nombre");
+                    return;
+                }
+
+                Estilo nuevo = new Estilo();
+                EstiloNegocio negocio = new EstiloNegocio();
                 nuevo.Descripcion = txtNuevoGenero.Text;
                 negocio.agregar(nuevo);
                 MessageBox.Show("Nuevo genero agregado");
@@ -209,8 +215,14 @@ namespace Presentacion
         {
             TipoEdicionNegocio negocio = new TipoEdicionNegocio();
             TipoDeEdicion nuevo = new TipoDeEdicion();
+
             try
-            {   
+            {   if (refactorizar.existeSiNoTipoEdicion(txtNuevaEdicion.Text, cboTipoDeEdicion))
+                {
+                    MessageBox.Show("Ya existe un tipo de edición con ese nombre");
+                    return;
+                }
+
                 nuevo.Descripcion = txtNuevaEdicion.Text;
                 negocio.agregarTipoEdicion(nuevo);
                 MessageBox.Show("Nuevo tipo de edición agregado");

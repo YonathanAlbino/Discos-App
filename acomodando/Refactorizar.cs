@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Dominio;
 
 namespace acomodando
 {
@@ -85,7 +86,48 @@ namespace acomodando
                 return false;
         }
 
+        public static bool ExisteSiNoEstilo(string NuevaInclusion, ComboBox comboBox)
+        {
+            try
+            {
+                List<Estilo> verSiExiste;
+                verSiExiste = (List<Estilo>)comboBox.DataSource;
+                Estilo nuevo = verSiExiste.Find(x => x.Descripcion.ToUpper() == NuevaInclusion.ToUpper());
+                if (nuevo != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex )
+            {
+
+                throw ex ;
+            } 
+        }
+
+        public static bool existeSiNoTipoEdicion(string nuevaInclusion, ComboBox comboBox)
+        {
+            try
+            {
+                List<TipoDeEdicion> verSiExiste;
+                verSiExiste = (List<TipoDeEdicion>)comboBox.DataSource;
+                TipoDeEdicion nuevo = verSiExiste.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToUpper());
+                if (nuevo != null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
 
-    }
+}
 }

@@ -47,12 +47,10 @@
             this.lblAgregarGenero = new System.Windows.Forms.Label();
             this.txtNuevoGenero = new System.Windows.Forms.TextBox();
             this.btnNuevoGenero = new System.Windows.Forms.Button();
-            this.lblEliminarGenero = new System.Windows.Forms.Label();
             this.btnEliminarGenero = new System.Windows.Forms.Button();
             this.lblNuevaEdicion = new System.Windows.Forms.Label();
             this.txtNuevaEdicion = new System.Windows.Forms.TextBox();
             this.btnAgergarEdicion = new System.Windows.Forms.Button();
-            this.lblEliminarTipoEdicion = new System.Windows.Forms.Label();
             this.btnEliminarTipoEdicion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcbImagenDiscoAlta)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +58,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(21, 77);
+            this.lblTitulo.Location = new System.Drawing.Point(31, 80);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(36, 13);
             this.lblTitulo.TabIndex = 0;
@@ -69,7 +67,7 @@
             // lblFechaLanzamiento
             // 
             this.lblFechaLanzamiento.AutoSize = true;
-            this.lblFechaLanzamiento.Location = new System.Drawing.Point(21, 121);
+            this.lblFechaLanzamiento.Location = new System.Drawing.Point(31, 124);
             this.lblFechaLanzamiento.Name = "lblFechaLanzamiento";
             this.lblFechaLanzamiento.Size = new System.Drawing.Size(114, 13);
             this.lblFechaLanzamiento.TabIndex = 1;
@@ -78,7 +76,7 @@
             // lblCantidadCanciones
             // 
             this.lblCantidadCanciones.AutoSize = true;
-            this.lblCantidadCanciones.Location = new System.Drawing.Point(21, 158);
+            this.lblCantidadCanciones.Location = new System.Drawing.Point(31, 161);
             this.lblCantidadCanciones.Name = "lblCantidadCanciones";
             this.lblCantidadCanciones.Size = new System.Drawing.Size(119, 13);
             this.lblCantidadCanciones.TabIndex = 2;
@@ -86,14 +84,14 @@
             // 
             // txtTitulo
             // 
-            this.txtTitulo.Location = new System.Drawing.Point(151, 70);
+            this.txtTitulo.Location = new System.Drawing.Point(161, 73);
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(200, 20);
             this.txtTitulo.TabIndex = 0;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(26, 490);
+            this.btnAceptar.Location = new System.Drawing.Point(58, 464);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 8;
@@ -103,7 +101,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(178, 490);
+            this.btnCancelar.Location = new System.Drawing.Point(175, 464);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 9;
@@ -115,7 +113,7 @@
             // 
             this.lblTituloAltaDisco.AutoSize = true;
             this.lblTituloAltaDisco.Font = new System.Drawing.Font("Arial", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloAltaDisco.Location = new System.Drawing.Point(31, 19);
+            this.lblTituloAltaDisco.Location = new System.Drawing.Point(41, 22);
             this.lblTituloAltaDisco.Name = "lblTituloAltaDisco";
             this.lblTituloAltaDisco.Size = new System.Drawing.Size(222, 24);
             this.lblTituloAltaDisco.TabIndex = 9;
@@ -123,7 +121,7 @@
             // 
             // txtCantidadCanciones
             // 
-            this.txtCantidadCanciones.Location = new System.Drawing.Point(151, 151);
+            this.txtCantidadCanciones.Location = new System.Drawing.Point(161, 154);
             this.txtCantidadCanciones.Name = "txtCantidadCanciones";
             this.txtCantidadCanciones.Size = new System.Drawing.Size(200, 20);
             this.txtCantidadCanciones.TabIndex = 2;
@@ -131,7 +129,7 @@
             // 
             // dtpFechaLanzamiento
             // 
-            this.dtpFechaLanzamiento.Location = new System.Drawing.Point(151, 114);
+            this.dtpFechaLanzamiento.Location = new System.Drawing.Point(161, 117);
             this.dtpFechaLanzamiento.Name = "dtpFechaLanzamiento";
             this.dtpFechaLanzamiento.Size = new System.Drawing.Size(200, 20);
             this.dtpFechaLanzamiento.TabIndex = 1;
@@ -139,7 +137,7 @@
             // lblTipoEdicion
             // 
             this.lblTipoEdicion.AutoSize = true;
-            this.lblTipoEdicion.Location = new System.Drawing.Point(21, 357);
+            this.lblTipoEdicion.Location = new System.Drawing.Point(31, 360);
             this.lblTipoEdicion.Name = "lblTipoEdicion";
             this.lblTipoEdicion.Size = new System.Drawing.Size(80, 13);
             this.lblTipoEdicion.TabIndex = 12;
@@ -148,7 +146,7 @@
             // lblGenero
             // 
             this.lblGenero.AutoSize = true;
-            this.lblGenero.Location = new System.Drawing.Point(23, 260);
+            this.lblGenero.Location = new System.Drawing.Point(33, 263);
             this.lblGenero.Name = "lblGenero";
             this.lblGenero.Size = new System.Drawing.Size(42, 13);
             this.lblGenero.TabIndex = 13;
@@ -157,7 +155,7 @@
             // cboGenero
             // 
             this.cboGenero.FormattingEnabled = true;
-            this.cboGenero.Location = new System.Drawing.Point(151, 252);
+            this.cboGenero.Location = new System.Drawing.Point(161, 255);
             this.cboGenero.Name = "cboGenero";
             this.cboGenero.Size = new System.Drawing.Size(121, 21);
             this.cboGenero.TabIndex = 4;
@@ -165,7 +163,7 @@
             // cboTipoDeEdicion
             // 
             this.cboTipoDeEdicion.FormattingEnabled = true;
-            this.cboTipoDeEdicion.Location = new System.Drawing.Point(151, 357);
+            this.cboTipoDeEdicion.Location = new System.Drawing.Point(161, 360);
             this.cboTipoDeEdicion.Name = "cboTipoDeEdicion";
             this.cboTipoDeEdicion.Size = new System.Drawing.Size(121, 21);
             this.cboTipoDeEdicion.TabIndex = 6;
@@ -173,7 +171,7 @@
             // lblUrlImagen
             // 
             this.lblUrlImagen.AutoSize = true;
-            this.lblUrlImagen.Location = new System.Drawing.Point(21, 208);
+            this.lblUrlImagen.Location = new System.Drawing.Point(31, 211);
             this.lblUrlImagen.Name = "lblUrlImagen";
             this.lblUrlImagen.Size = new System.Drawing.Size(57, 13);
             this.lblUrlImagen.TabIndex = 16;
@@ -181,7 +179,7 @@
             // 
             // txtUrlImagen
             // 
-            this.txtUrlImagen.Location = new System.Drawing.Point(151, 201);
+            this.txtUrlImagen.Location = new System.Drawing.Point(161, 204);
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(200, 20);
             this.txtUrlImagen.TabIndex = 3;
@@ -189,7 +187,7 @@
             // 
             // pcbImagenDiscoAlta
             // 
-            this.pcbImagenDiscoAlta.Location = new System.Drawing.Point(544, 158);
+            this.pcbImagenDiscoAlta.Location = new System.Drawing.Point(426, 73);
             this.pcbImagenDiscoAlta.Name = "pcbImagenDiscoAlta";
             this.pcbImagenDiscoAlta.Size = new System.Drawing.Size(216, 232);
             this.pcbImagenDiscoAlta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -199,7 +197,7 @@
             // lblAgregarGenero
             // 
             this.lblAgregarGenero.AutoSize = true;
-            this.lblAgregarGenero.Location = new System.Drawing.Point(19, 295);
+            this.lblAgregarGenero.Location = new System.Drawing.Point(29, 298);
             this.lblAgregarGenero.Name = "lblAgregarGenero";
             this.lblAgregarGenero.Size = new System.Drawing.Size(116, 13);
             this.lblAgregarGenero.TabIndex = 19;
@@ -207,14 +205,14 @@
             // 
             // txtNuevoGenero
             // 
-            this.txtNuevoGenero.Location = new System.Drawing.Point(151, 288);
+            this.txtNuevoGenero.Location = new System.Drawing.Point(161, 291);
             this.txtNuevoGenero.Name = "txtNuevoGenero";
-            this.txtNuevoGenero.Size = new System.Drawing.Size(124, 20);
+            this.txtNuevoGenero.Size = new System.Drawing.Size(121, 20);
             this.txtNuevoGenero.TabIndex = 5;
             // 
             // btnNuevoGenero
             // 
-            this.btnNuevoGenero.Location = new System.Drawing.Point(281, 283);
+            this.btnNuevoGenero.Location = new System.Drawing.Point(291, 286);
             this.btnNuevoGenero.Name = "btnNuevoGenero";
             this.btnNuevoGenero.Size = new System.Drawing.Size(24, 28);
             this.btnNuevoGenero.TabIndex = 21;
@@ -222,20 +220,11 @@
             this.btnNuevoGenero.UseVisualStyleBackColor = true;
             this.btnNuevoGenero.Click += new System.EventHandler(this.btnNuevoGenero_Click);
             // 
-            // lblEliminarGenero
-            // 
-            this.lblEliminarGenero.AutoSize = true;
-            this.lblEliminarGenero.Location = new System.Drawing.Point(326, 260);
-            this.lblEliminarGenero.Name = "lblEliminarGenero";
-            this.lblEliminarGenero.Size = new System.Drawing.Size(120, 13);
-            this.lblEliminarGenero.TabIndex = 22;
-            this.lblEliminarGenero.Text = "Eliminar (Físico) genero ";
-            // 
             // btnEliminarGenero
             // 
-            this.btnEliminarGenero.Location = new System.Drawing.Point(443, 252);
+            this.btnEliminarGenero.Location = new System.Drawing.Point(321, 286);
             this.btnEliminarGenero.Name = "btnEliminarGenero";
-            this.btnEliminarGenero.Size = new System.Drawing.Size(19, 21);
+            this.btnEliminarGenero.Size = new System.Drawing.Size(22, 29);
             this.btnEliminarGenero.TabIndex = 23;
             this.btnEliminarGenero.Text = "-";
             this.btnEliminarGenero.UseVisualStyleBackColor = true;
@@ -244,7 +233,7 @@
             // lblNuevaEdicion
             // 
             this.lblNuevaEdicion.AutoSize = true;
-            this.lblNuevaEdicion.Location = new System.Drawing.Point(19, 397);
+            this.lblNuevaEdicion.Location = new System.Drawing.Point(4, 407);
             this.lblNuevaEdicion.Name = "lblNuevaEdicion";
             this.lblNuevaEdicion.Size = new System.Drawing.Size(146, 13);
             this.lblNuevaEdicion.TabIndex = 24;
@@ -252,14 +241,14 @@
             // 
             // txtNuevaEdicion
             // 
-            this.txtNuevaEdicion.Location = new System.Drawing.Point(171, 394);
+            this.txtNuevaEdicion.Location = new System.Drawing.Point(161, 400);
             this.txtNuevaEdicion.Name = "txtNuevaEdicion";
-            this.txtNuevaEdicion.Size = new System.Drawing.Size(100, 20);
+            this.txtNuevaEdicion.Size = new System.Drawing.Size(121, 20);
             this.txtNuevaEdicion.TabIndex = 7;
             // 
             // btnAgergarEdicion
             // 
-            this.btnAgergarEdicion.Location = new System.Drawing.Point(280, 389);
+            this.btnAgergarEdicion.Location = new System.Drawing.Point(290, 392);
             this.btnAgergarEdicion.Name = "btnAgergarEdicion";
             this.btnAgergarEdicion.Size = new System.Drawing.Size(25, 29);
             this.btnAgergarEdicion.TabIndex = 26;
@@ -267,20 +256,11 @@
             this.btnAgergarEdicion.UseVisualStyleBackColor = true;
             this.btnAgergarEdicion.Click += new System.EventHandler(this.btnAgergarEdicion_Click);
             // 
-            // lblEliminarTipoEdicion
-            // 
-            this.lblEliminarTipoEdicion.AutoSize = true;
-            this.lblEliminarTipoEdicion.Location = new System.Drawing.Point(326, 365);
-            this.lblEliminarTipoEdicion.Name = "lblEliminarTipoEdicion";
-            this.lblEliminarTipoEdicion.Size = new System.Drawing.Size(156, 13);
-            this.lblEliminarTipoEdicion.TabIndex = 27;
-            this.lblEliminarTipoEdicion.Text = "Eliminar (Físico) tipo de edicion:";
-            // 
             // btnEliminarTipoEdicion
             // 
-            this.btnEliminarTipoEdicion.Location = new System.Drawing.Point(488, 361);
+            this.btnEliminarTipoEdicion.Location = new System.Drawing.Point(320, 392);
             this.btnEliminarTipoEdicion.Name = "btnEliminarTipoEdicion";
-            this.btnEliminarTipoEdicion.Size = new System.Drawing.Size(23, 21);
+            this.btnEliminarTipoEdicion.Size = new System.Drawing.Size(23, 31);
             this.btnEliminarTipoEdicion.TabIndex = 28;
             this.btnEliminarTipoEdicion.Text = "-";
             this.btnEliminarTipoEdicion.UseVisualStyleBackColor = true;
@@ -290,14 +270,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 587);
+            this.ClientSize = new System.Drawing.Size(675, 524);
             this.Controls.Add(this.btnEliminarTipoEdicion);
-            this.Controls.Add(this.lblEliminarTipoEdicion);
             this.Controls.Add(this.btnAgergarEdicion);
             this.Controls.Add(this.txtNuevaEdicion);
             this.Controls.Add(this.lblNuevaEdicion);
             this.Controls.Add(this.btnEliminarGenero);
-            this.Controls.Add(this.lblEliminarGenero);
             this.Controls.Add(this.btnNuevoGenero);
             this.Controls.Add(this.txtNuevoGenero);
             this.Controls.Add(this.lblAgregarGenero);
@@ -348,12 +326,10 @@
         private System.Windows.Forms.Label lblAgregarGenero;
         private System.Windows.Forms.TextBox txtNuevoGenero;
         private System.Windows.Forms.Button btnNuevoGenero;
-        private System.Windows.Forms.Label lblEliminarGenero;
         private System.Windows.Forms.Button btnEliminarGenero;
         private System.Windows.Forms.Label lblNuevaEdicion;
         private System.Windows.Forms.TextBox txtNuevaEdicion;
         private System.Windows.Forms.Button btnAgergarEdicion;
-        private System.Windows.Forms.Label lblEliminarTipoEdicion;
         private System.Windows.Forms.Button btnEliminarTipoEdicion;
     }
 }
