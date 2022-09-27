@@ -32,7 +32,7 @@ namespace acomodando
             {
                 pcb.Load(imagen);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 pcb.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThyEKIq_a7eWEwVEoo1aTBQ6gV1KQ4BI8ojEQgnl0ITQ&s");
             }
@@ -126,6 +126,61 @@ namespace acomodando
 
                 throw ex;
             }
+        }
+
+        public static bool existeSiNoGeneroEdicion (object nuevaInclusion, ComboBox comboBox)
+        {
+            try
+            {
+                bool existe;
+
+                if (nuevaInclusion.GetType() == typeof(TipoDeEdicion))
+                {
+                    List<TipoDeEdicion> lista;
+                    lista = (List<TipoDeEdicion>)comboBox.DataSource;
+                    TipoDeEdicion nuevaEdicion = lista.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToString().ToUpper());
+                    if (nuevaEdicion != null)
+                        existe = true;
+                    else
+                        existe = false;
+                }
+                else
+                {
+                    List<Estilo> lista;
+                    lista = (List<Estilo>)comboBox.DataSource;
+                    Estilo nuevoEstilo = lista.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToString().ToUpper());
+                    if (nuevoEstilo != null)
+                        existe = true;
+                    else
+                        existe = false;
+                }
+                return existe;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+           // List<object> verSiExiste;
+           // verSiExiste = (List<object>)comboBox.DataSource;
+           //object nuevo = verSiExiste.Find(x => x.ToString().ToUpper() == nuevaInclusion.ToString());
+           // if (nuevo != null)
+           //     return true;
+           // else
+           //     return false;
         }
 
 

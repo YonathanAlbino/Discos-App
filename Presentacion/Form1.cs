@@ -225,12 +225,17 @@ namespace Presentacion
 
         private void btnFiltroRapido_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void txtFiltroRapido_TextChanged(object sender, EventArgs e)
+        {
             List<Disco> listaFiltrada;
             string filtro = txtFiltroRapido.Text;
 
-            if (filtro != "")
+            if (filtro.Length >= 3)
             {
-                listaFiltrada = listaDisco.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Edicion.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                listaFiltrada = listaDisco.FindAll(x => x.Titulo.ToUpper().Contains(filtro.ToUpper()) || x.Genero.Descripcion.ToUpper().Contains(filtro.ToUpper()));
             }
             else
             {
@@ -243,6 +248,7 @@ namespace Presentacion
             ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
             ajuste.ocularColumnas(dgvDiscos, "Id");
             ajuste.ocularColumnas(dgvDiscos, "Eliminado");
+            ajuste.FormatoFechaDgv(dgvDiscos, "fechaLanzamiento", "dd-MM-yyyy");
         }
     }
 

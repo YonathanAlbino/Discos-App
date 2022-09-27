@@ -170,15 +170,16 @@ namespace Presentacion
         {
             try
             {
-                if(refactorizar.ExisteSiNoEstilo(txtNuevoGenero.Text, cboGenero))
+                Estilo nuevo = new Estilo();
+                nuevo.Descripcion = txtNuevoGenero.Text;
+
+                if(refactorizar.existeSiNoGeneroEdicion(nuevo, cboGenero))
                 {
                     MessageBox.Show("Ya existe un genero con ese nombre");
                     return;
                 }
 
-                Estilo nuevo = new Estilo();
                 EstiloNegocio negocio = new EstiloNegocio();
-                nuevo.Descripcion = txtNuevoGenero.Text;
                 negocio.agregar(nuevo);
                 MessageBox.Show("Nuevo genero agregado");
                 cboGenero.DataSource = negocio.listar();
@@ -213,21 +214,22 @@ namespace Presentacion
 
         private void btnAgergarEdicion_Click(object sender, EventArgs e)
         {
-            TipoEdicionNegocio negocio = new TipoEdicionNegocio();
-            TipoDeEdicion nuevo = new TipoDeEdicion();
-
             try
-            {   if (refactorizar.existeSiNoTipoEdicion(txtNuevaEdicion.Text, cboTipoDeEdicion))
+            {
+                TipoDeEdicion nuevo = new TipoDeEdicion();
+                nuevo.Descripcion = txtNuevaEdicion.Text;
+
+                if(refactorizar.existeSiNoGeneroEdicion(nuevo, cboTipoDeEdicion))
                 {
                     MessageBox.Show("Ya existe un tipo de edición con ese nombre");
                     return;
                 }
 
-                nuevo.Descripcion = txtNuevaEdicion.Text;
+                TipoEdicionNegocio negocio = new TipoEdicionNegocio();
                 negocio.agregarTipoEdicion(nuevo);
                 MessageBox.Show("Nuevo tipo de edición agregado");
                 cboTipoDeEdicion.DataSource = negocio.listar();
-               txtNuevaEdicion.Text = "";
+                txtNuevaEdicion.Text = "";
             }
             catch (Exception ex)
             {

@@ -151,6 +151,7 @@
             this.txtFiltroRapido.Name = "txtFiltroRapido";
             this.txtFiltroRapido.Size = new System.Drawing.Size(180, 20);
             this.txtFiltroRapido.TabIndex = 10;
+            this.txtFiltroRapido.TextChanged += new System.EventHandler(this.txtFiltroRapido_TextChanged);
             // 
             // btnFiltroRapido
             // 
