@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using Dominio;
 using negocio;
 using acomodando;
-
-
+using System.IO;
+using System.Configuration;
 
 namespace Presentacion
 {
@@ -55,11 +55,13 @@ namespace Presentacion
             Width = 800;
             Height = 480;
         }
+
         private Disco disco = null;
         private bool actualizarDgv = false;
         List<Estilo> listaEstilos = new List<Estilo>();
-        
-       
+        private OpenFileDialog archivo = null;
+
+
 
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -67,6 +69,7 @@ namespace Presentacion
             Close();
         }
 
+        
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             DiscosNegocio negocio = new DiscosNegocio();
@@ -94,6 +97,44 @@ namespace Presentacion
                     MessageBox.Show("Agregado exitosamente");
                     actualizarDgv = true;
                 }
+
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                {
+                    try
+                    {
+                        string ruta = @"C:\DiscoApp";
+                        string file = archivo.SafeFileName;
+                        string rutaCompleta = ruta + @"\" + file;
+
+                        if (File.Exists(rutaCompleta))
+                        {
+                            if (refactorizar.ValidarSiNo("La imagen que intenta guardar ya existe, ¿Desea sobreescribirla?", "Sobreescribir?"))
+                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                        }
+                        else
+                        {
+                            File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                            MessageBox.Show("Imagen guardada");
+                        }
+
+                    }
+                    //catch (System.IO.IOException)
+                    //{
+                    //    MessageBox.Show("No se pudo guardar la imagen (en la carpeta de destino) porque ya existe una con el mismo nombre");
+                    //    if(refactorizar.ValidarSiNo("¿Desea sobreescribir la imagen", "Sobreescribir..."))
+                    //    {
+                    //        File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                    //    }
+
+                    //}
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                   
+                    
+                }
+
                 Close();
             }
             catch (Exception ex)
@@ -260,6 +301,41 @@ namespace Presentacion
 
         private void btnEliminarLogicoGenero_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            refactorizar ajustes = new refactorizar();
+
+            try
+            {
+                archivo.Filter = "jpg|*.jpg| png perrito|*.png";
+
+                if (archivo.ShowDialog() == DialogResult.OK)
+                {
+                    txtUrlImagen.Text = archivo.FileName;
+                    ajustes.cargarImagen(pcbImagenDiscoAlta, archivo.FileName);
+
+                    //if(refactorizar.ValidarSiNo("Desea guardar la imagen", "Guardando imagen"))
+                    //{
+                    //    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
+
+
+
+
+
+          
 
         }
     }

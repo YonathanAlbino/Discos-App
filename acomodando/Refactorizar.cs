@@ -130,31 +130,47 @@ namespace acomodando
 
         public static bool existeSiNoGeneroEdicion (object nuevaInclusion, ComboBox comboBox)
         {
+            //try
+            //{
+            //    bool existe;
+
+            //    if (nuevaInclusion.GetType() == typeof(TipoDeEdicion))
+            //    {
+            //        List<TipoDeEdicion> lista;
+            //        lista = (List<TipoDeEdicion>)comboBox.DataSource;
+            //        TipoDeEdicion nuevaEdicion = lista.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToString().ToUpper());
+            //        if (nuevaEdicion != null)
+            //            existe = true;
+            //        else
+            //            existe = false;
+            //    }
+            //    else
+            //    {
+            //        List<Estilo> lista;
+            //        lista = (List<Estilo>)comboBox.DataSource;
+            //        Estilo nuevoEstilo = lista.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToString().ToUpper());
+            //        if (nuevoEstilo != null)
+            //            existe = true;
+            //        else
+            //            existe = false;
+            //    }
+            //    return existe;
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw ex;
+            //}
+
             try
             {
-                bool existe;
-
-                if (nuevaInclusion.GetType() == typeof(TipoDeEdicion))
-                {
-                    List<TipoDeEdicion> lista;
-                    lista = (List<TipoDeEdicion>)comboBox.DataSource;
-                    TipoDeEdicion nuevaEdicion = lista.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToString().ToUpper());
-                    if (nuevaEdicion != null)
-                        existe = true;
-                    else
-                        existe = false;
-                }
+                string nuevo = nuevaInclusion.ToString().ToUpper();
+                int i = -1;
+                i = comboBox.FindStringExact(nuevo);
+                if (i != -1)
+                    return true;
                 else
-                {
-                    List<Estilo> lista;
-                    lista = (List<Estilo>)comboBox.DataSource;
-                    Estilo nuevoEstilo = lista.Find(x => x.Descripcion.ToUpper() == nuevaInclusion.ToString().ToUpper());
-                    if (nuevoEstilo != null)
-                        existe = true;
-                    else
-                        existe = false;
-                }
-                return existe;
+                    return false;
             }
             catch (Exception ex)
             {
@@ -162,18 +178,6 @@ namespace acomodando
                 throw ex;
             }
 
-
-
-
-
-
-
-
-
-
-            
-            
-            
            // List<object> verSiExiste;
            // verSiExiste = (List<object>)comboBox.DataSource;
            //object nuevo = verSiExiste.Find(x => x.ToString().ToUpper() == nuevaInclusion.ToString());

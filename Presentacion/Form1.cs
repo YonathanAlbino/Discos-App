@@ -30,6 +30,9 @@ namespace Presentacion
         private void Form1_Load(object sender, EventArgs e)
         {
             cargar();
+            cboCampo.Items.Add("Cantidad de canciones");
+            cboCampo.Items.Add("Género");
+            cboCampo.Items.Add("Edición");
 
         }
 
@@ -223,9 +226,22 @@ namespace Presentacion
             }
         }
 
-        private void btnFiltroRapido_Click(object sender, EventArgs e)
+        private void btnFiltroAvanzado_Click(object sender, EventArgs e)
         {
+            DiscosNegocio negocio = new DiscosNegocio();
+            try
+            {
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvDiscos.DataSource = negocio.filtrar(campo, criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             
+           
         }
 
         private void txtFiltroRapido_TextChanged(object sender, EventArgs e)
@@ -242,13 +258,33 @@ namespace Presentacion
                 listaFiltrada = listaDisco;
             }
 
-            dgvDiscos.DataSource = null;
+            //dgvDiscos.DataSource = null;
             dgvDiscos.DataSource = listaFiltrada;
 
             ajuste.ocularColumnas(dgvDiscos, "UrlImagenTapa");
             ajuste.ocularColumnas(dgvDiscos, "Id");
             ajuste.ocularColumnas(dgvDiscos, "Eliminado");
             ajuste.FormatoFechaDgv(dgvDiscos, "fechaLanzamiento", "dd-MM-yyyy");
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string campo = cboCampo.SelectedItem.ToString();
+            
+            if(campo == "Cantidad de canciones")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Igual a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Mayor a");
+            }
+            else
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
         }
     }
 

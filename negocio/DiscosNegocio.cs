@@ -192,5 +192,101 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Disco> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Disco> lista = new List<Disco>();
+            AccesoDatosCentral datos = new AccesoDatosCentral();
+            try
+            {
+                string consulta = "select D.Id as Id, Titulo, fechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as Estilo, T.Descripcion as Edicion, IdEstilo, IdTipoEdicion, D.Activo AS eliminado from DISCOS D, ESTILOS E, TIPOSEDICION T  where D.IdEstilo = E.Id   and T.Id = D.IdTipoEdicion and D.Activo = 1 And ";
+
+               if(campo == "Cantidad de canciones")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "CantidadCanciones >" + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "CantidadCanciones <" + filtro;
+                            break;
+                        default:
+                            consulta += "CantidadCanciones =" + filtro;
+                            break;
+                    }
+                }
+                else if(campo == "Género")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "E.Descripcion like '" + filtro + "%' ";
+                            break;
+                        case "Termina con":
+                            consulta += "E.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "E.Descripcion like  '%" + filtro + "%' ";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "T.Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "T.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "T.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+
+                while (datos.Lector.Read())
+                {
+                    //Disco aux = new Disco(lector.GetString(0), (int)lector["CantidadCanciones"]);
+                    Disco aux = new Disco();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.FechaLanzamiento = (DateTime)datos.Lector["fechaLanzamiento"];
+                    aux.CantidadDeCanciones = (int)datos.Lector["CantidadCanciones"];
+                    aux.Eliminado = (int)datos.Lector["eliminado"];
+
+
+                    if (refactorizar.validarColumnaNula(datos.Lector, "UrlImagenTapa"))
+                        aux.UrlImagenTapa = (string)datos.Lector["UrlImagenTapa"];
+
+                    aux.Genero = new Estilo();
+                    aux.Genero.Descripcion = (string)datos.Lector["Estilo"];
+                    aux.Genero.Id = (int)datos.Lector["IdEstilo"];
+                    aux.Edicion = new TipoDeEdicion();
+                    aux.Edicion.Descripcion = (string)datos.Lector["Edicion"];
+                    aux.Edicion.Id = (int)datos.Lector["IdTipoEdicion"];
+
+                    lista.Add(aux);
+                }
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

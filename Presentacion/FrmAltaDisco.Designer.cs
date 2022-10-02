@@ -52,6 +52,7 @@
             this.txtNuevaEdicion = new System.Windows.Forms.TextBox();
             this.btnAgergarEdicion = new System.Windows.Forms.Button();
             this.btnEliminarTipoEdicion = new System.Windows.Forms.Button();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pcbImagenDiscoAlta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -266,11 +267,22 @@
             this.btnEliminarTipoEdicion.UseVisualStyleBackColor = true;
             this.btnEliminarTipoEdicion.Click += new System.EventHandler(this.btnEliminarTipoEdicion_Click);
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(367, 204);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(19, 25);
+            this.btnAgregarImagen.TabIndex = 29;
+            this.btnAgregarImagen.Text = "+";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // FrmAltaDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 524);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.btnEliminarTipoEdicion);
             this.Controls.Add(this.btnAgergarEdicion);
             this.Controls.Add(this.txtNuevaEdicion);
@@ -331,5 +343,6 @@
         private System.Windows.Forms.TextBox txtNuevaEdicion;
         private System.Windows.Forms.Button btnAgergarEdicion;
         private System.Windows.Forms.Button btnEliminarTipoEdicion;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }
