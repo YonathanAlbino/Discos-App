@@ -27,6 +27,9 @@ namespace Presentacion
             Text = "Modificar Disco";
             this.disco = disco;
             lblTituloAltaDisco.Text = "Modificar Disco";
+            imagenAborrar.FileName = disco.UrlImagenTapa;
+            imagenAEliminar = imagenAborrar.SafeFileName;
+            
 
            
             btnEliminarGenero.Visible = false;
@@ -57,9 +60,11 @@ namespace Presentacion
         }
 
         private Disco disco = null;
+        OpenFileDialog imagenAborrar = new OpenFileDialog();
         private bool actualizarDgv = false;
         List<Estilo> listaEstilos = new List<Estilo>();
         private OpenFileDialog archivo = null;
+        string imagenAEliminar;
 
 
 
@@ -87,54 +92,76 @@ namespace Presentacion
 
 
                 if (disco.Id != 0) {
+
+
+                    try
+                    {
+                        if (imagenAborrar.FileName != disco.UrlImagenTapa)
+                        {
+                            string ruta = @"C:\DiscoApp";
+                            string file = imagenAEliminar;
+                            string rutaCompleta = ruta + @"\" + file;
+
+                            if (File.Exists(rutaCompleta))
+                            {
+                                if (refactorizar.ValidarSiNo("¿Desea borrar la imagen anterior?", "Borrar imagen?"))
+                                {
+                                    File.Delete(rutaCompleta);
+                                }
+                                    File.Copy(disco.UrlImagenTapa, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encontro la anterior imagen guardada");
+                                File.Copy(disco.UrlImagenTapa, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.ToString());
+                    }
                     negocio.modificar(disco);
                     MessageBox.Show("Modificado exitosamente");
                     actualizarDgv = true;
                 }
                 else
                 {
+
+                    if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                    {
+                        try
+                        {
+                            string ruta = @"C:\DiscoApp";
+                            string file = archivo.SafeFileName;
+                            string rutaCompleta = ruta + @"\" + file;
+
+                            if (File.Exists(rutaCompleta))
+                            {
+                                if (refactorizar.ValidarSiNo("La imagen que intenta guardar ya existe, ¿Desea sobreescribirla?", "Sobreescribir?")) ;
+                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                            }
+                            else
+                            {
+                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                                MessageBox.Show("Imagen guardada");
+                            }
+
+                        }
+
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                    }
+
                     negocio.agregar(disco);
                     MessageBox.Show("Agregado exitosamente");
                     actualizarDgv = true;
                 }
 
-                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
-                {
-                    try
-                    {
-                        string ruta = @"C:\DiscoApp";
-                        string file = archivo.SafeFileName;
-                        string rutaCompleta = ruta + @"\" + file;
-
-                        if (File.Exists(rutaCompleta))
-                        {
-                            if (refactorizar.ValidarSiNo("La imagen que intenta guardar ya existe, ¿Desea sobreescribirla?", "Sobreescribir?"))
-                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
-                        }
-                        else
-                        {
-                            File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
-                            MessageBox.Show("Imagen guardada");
-                        }
-
-                    }
-                    //catch (System.IO.IOException)
-                    //{
-                    //    MessageBox.Show("No se pudo guardar la imagen (en la carpeta de destino) porque ya existe una con el mismo nombre");
-                    //    if(refactorizar.ValidarSiNo("¿Desea sobreescribir la imagen", "Sobreescribir..."))
-                    //    {
-                    //        File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
-                    //    }
-
-                    //}
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                   
-                    
-                }
-
+              
                 Close();
             }
             catch (Exception ex)
