@@ -27,8 +27,8 @@ namespace Presentacion
             Text = "Modificar Disco";
             this.disco = disco;
             lblTituloAltaDisco.Text = "Modificar Disco";
-            imagenAborrar.FileName = disco.UrlImagenTapa;
-            imagenAEliminar = imagenAborrar.SafeFileName;
+            imagenAborrar.FileName = disco.UrlImagenTapa; //Se carga con la imagen del disco antes de modificar
+            //imagenAEliminar = imagenAborrar.SafeFileName;
             
 
            
@@ -64,7 +64,8 @@ namespace Presentacion
         private bool actualizarDgv = false;
         List<Estilo> listaEstilos = new List<Estilo>();
         private OpenFileDialog archivo = null;
-        string imagenAEliminar;
+        //string imagenAEliminar;
+        string ruta = @"C:\DiscoApp";
 
 
 
@@ -92,28 +93,30 @@ namespace Presentacion
 
 
                 if (disco.Id != 0) {
-
-
                     try
                     {
-                        if (imagenAborrar.FileName != disco.UrlImagenTapa)
+                        if (imagenAborrar.FileName != disco.UrlImagenTapa) //Si la imagen que se guardo en el constructor es distinta a la que se termino guardando en el disco, significa que se quiere modificar
                         {
-                            string ruta = @"C:\DiscoApp";
-                            string file = imagenAEliminar;
-                            string rutaCompleta = ruta + @"\" + file;
-
-                            if (File.Exists(rutaCompleta))
+                            if (File.Exists(refactorizar.obtenerRuta(ruta, imagenAborrar.SafeFileName))) //Verifica si la imagen anterior continua en la carpeta
                             {
                                 if (refactorizar.ValidarSiNo("¿Desea borrar la imagen anterior?", "Borrar imagen?"))
                                 {
-                                    File.Delete(rutaCompleta);
+                                    File.Delete(refactorizar.obtenerRuta(ruta, imagenAborrar.SafeFileName));
                                 }
-                                    File.Copy(disco.UrlImagenTapa, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
                             }
                             else
                             {
                                 MessageBox.Show("No se encontro la anterior imagen guardada");
-                                File.Copy(disco.UrlImagenTapa, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                            }
+
+                            if (File.Exists(refactorizar.obtenerRuta(ruta, archivo.SafeFileName))) //Verifica si el nuevo archivo ya existe en la carpeta
+                            {
+                                if (refactorizar.ValidarSiNo("Ya existe un archivo con el mismo nombre, desea sobreescribirlo?", "Sobreescribir"))
+                                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                            }
+                            else
+                            {
+                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName); // Si la imagen nueva no existe, la copia directamente
                             }
                         }
                     }
@@ -133,18 +136,14 @@ namespace Presentacion
                     {
                         try
                         {
-                            string ruta = @"C:\DiscoApp";
-                            string file = archivo.SafeFileName;
-                            string rutaCompleta = ruta + @"\" + file;
-
-                            if (File.Exists(rutaCompleta))
+                            if (File.Exists(refactorizar.obtenerRuta(ruta, archivo.SafeFileName))) //Verifica si la imagen que se va a cargar ya existe en la carpeta
                             {
-                                if (refactorizar.ValidarSiNo("La imagen que intenta guardar ya existe, ¿Desea sobreescribirla?", "Sobreescribir?")) ;
-                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                                if (refactorizar.ValidarSiNo("La imagen que intenta guardar ya existe, ¿Desea sobreescribirla?", "Sobreescribir?"))
+                                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
                             }
                             else
                             {
-                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName); // Si la imagen nueva no existe, la copia directamente
                                 MessageBox.Show("Imagen guardada");
                             }
 
@@ -344,11 +343,6 @@ namespace Presentacion
                 {
                     txtUrlImagen.Text = archivo.FileName;
                     ajustes.cargarImagen(pcbImagenDiscoAlta, archivo.FileName);
-
-                    //if(refactorizar.ValidarSiNo("Desea guardar la imagen", "Guardando imagen"))
-                    //{
-                    //    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
-                    //}
                 }
             }
             catch (Exception ex)

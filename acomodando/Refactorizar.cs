@@ -187,6 +187,12 @@ namespace acomodando
            //     return false;
         }
 
+        public static string obtenerRuta(string ruta, string nombreNuevoArchivo)
+        {
+            string rutaCompleta = ruta + @"\" + nombreNuevoArchivo;
+            return rutaCompleta;
+        }
+
 
 }
 }
