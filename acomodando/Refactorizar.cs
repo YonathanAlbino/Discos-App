@@ -189,10 +189,48 @@ namespace acomodando
 
         public static string obtenerRuta(string ruta, string nombreNuevoArchivo)
         {
-            string rutaCompleta = ruta + @"\" + nombreNuevoArchivo;
-            return rutaCompleta;
+            try
+            {
+                string rutaCompleta = ruta + @"\" + nombreNuevoArchivo;
+                return rutaCompleta;
+            }
+            catch (Exception ex )
+            {
+
+                throw ex;
+            }
         }
 
+        public static bool ValidarComboBox(ComboBox comboBox)
+        {
+            if (comboBox.SelectedIndex < 0)
+                return true;
+            else
+                return false;
+        }
+        public static bool verificarCombos(List<ComboBox> lista)
+        {
+            bool aux = false;
+            foreach (ComboBox item in lista)
+            {
+                if (item.SelectedIndex < 0)
+                    aux = true;
+            }
+            return aux;
+        }
+        public static bool soloNumeros(string cadena)
+        {
+            bool aux = false;
+
+            foreach (char caracter in cadena)
+            {
+                if (char.IsNumber(caracter))
+                {
+                    aux = true;
+                }
+            }
+            return aux;
+        }
 
 }
 }

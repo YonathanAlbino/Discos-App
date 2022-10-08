@@ -189,6 +189,7 @@
             // 
             // cboCampo
             // 
+            this.cboCampo.BackColor = System.Drawing.SystemColors.Window;
             this.cboCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCampo.FormattingEnabled = true;
             this.cboCampo.Location = new System.Drawing.Point(88, 430);
@@ -205,6 +206,7 @@
             this.cboCriterio.Name = "cboCriterio";
             this.cboCriterio.Size = new System.Drawing.Size(108, 21);
             this.cboCriterio.TabIndex = 15;
+            this.cboCriterio.SelectedIndexChanged += new System.EventHandler(this.cboCriterio_SelectedIndexChanged);
             // 
             // lblFiltro
             // 

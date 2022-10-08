@@ -193,6 +193,7 @@ namespace Presentacion
 
                 if(disco != null)
                 {
+                    
                     txtTitulo.Text = disco.Titulo;
                     dtpFechaLanzamiento.Value = disco.FechaLanzamiento;
                     txtCantidadCanciones.Text = disco.CantidadDeCanciones.ToString();

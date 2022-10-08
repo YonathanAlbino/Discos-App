@@ -27,6 +27,7 @@ namespace Presentacion
         private List<Disco> listaDisco;
         private List<Disco> listaDiscosEliminados = new List<Disco>();
         private refactorizar ajuste = new refactorizar();
+        private List<ComboBox> listacomboBox = new List<ComboBox>();
         private void Form1_Load(object sender, EventArgs e)
         {
             cargar();
@@ -226,11 +227,40 @@ namespace Presentacion
             }
         }
 
+        private bool validarFiltro()
+        {
+            if(cboCampo.SelectedItem.ToString() == "Cantidad de canciones")
+            {
+                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                {
+                    MessageBox.Show("El filtro de busqueda se encuentra vacio");
+                    return true;
+                }
+                if (!(refactorizar.soloNumeros(txtFiltroAvanzado.Text)))
+                {
+                    MessageBox.Show("Ingrese solo numeros para filtrar por un campo númerico");
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         private void btnFiltroAvanzado_Click(object sender, EventArgs e)
         {
             DiscosNegocio negocio = new DiscosNegocio();
             try
             {
+                listacomboBox.Add(cboCampo);
+                listacomboBox.Add(cboCriterio);
+                if (refactorizar.verificarCombos(listacomboBox))
+                {
+                    MessageBox.Show("Almenos uno de los desplegables se encuentra vacio");
+                    return;
+                }
+                
+                if(validarFiltro())
+                    return;
+
                 string campo = cboCampo.SelectedItem.ToString();
                 string criterio = cboCriterio.SelectedItem.ToString();
                 string filtro = txtFiltroAvanzado.Text;
@@ -285,6 +315,11 @@ namespace Presentacion
                 cboCriterio.Items.Add("Termina con");
                 cboCriterio.Items.Add("Contiene");
             }
+        }
+
+        private void cboCriterio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
